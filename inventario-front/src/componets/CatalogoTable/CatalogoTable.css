@@ -1,0 +1,64 @@
+  .catalog-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra alrededor de la tabla */
+  }
+  
+  .catalog-table thead {
+    background-color: #2c3e50; /* Fondo oscuro para el encabezado */
+    color: white;
+  }
+  
+  .catalog-table th, .catalog-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #ddd; /* Línea divisoria suave */
+  }
+  
+  .catalog-table tbody tr {
+    transition: background-color 0.3s ease; /* Transición suave para el hover */
+  }
+  
+  .catalog-table tbody tr:hover {
+    background-color: #f1f1f1; /* Fondo claro al pasar el cursor */
+  }
+  
+  .catalog-table th {
+    text-transform: uppercase;
+    letter-spacing: 0.05em; /* Espaciado de letras para una mejor lectura */
+    font-size: 14px;
+  }
+  
+  .catalog-table td {
+    color: #2c3e50;
+  }
+  
+  .catalog-table tbody tr:nth-of-type(odd) {
+    background-color: #fafafa; /* Color alterno suave para las filas */
+  }
+  
+  .catalog-table button {
+    padding: 8px 16px;
+    background-color: #3498db; /* Botón azul */
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .catalog-table button:hover {
+    background-color: #2980b9; /* Color más oscuro al pasar el cursor */
+  }
+  
+  .catalog-table button:focus {
+    outline: none;
+  }
+  
+  .catalog-table th, .catalog-table td {
+    text-align: center;
+  }
+  
