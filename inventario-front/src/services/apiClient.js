@@ -18,7 +18,7 @@ const setupInterceptors = () => {
                 if (!isAlreadyAlerted) {
                     isAlreadyAlerted = true;
                     alert('Tu sesión ha caducado. Por favor, inicia sesión nuevamente.');
-                    window.localStorage.removeItem('loggedRhAppUser');
+                    window.localStorage.removeItem('loggedInventario');
                     window.location.reload();
                 }
             }

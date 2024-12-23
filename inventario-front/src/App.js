@@ -24,7 +24,7 @@ const AppContent = () => {
   }, [navigate]);
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedinventario')
+    const loggedUserJSON = window.localStorage.getItem('loggedInventario')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
@@ -42,7 +42,7 @@ const AppContent = () => {
       })
   
       window.localStorage.setItem(
-        'loggedinventario', JSON.stringify(user)
+        'loggedInventario', JSON.stringify(user)
       )
 
       //empleadosService.setToken(user.token)

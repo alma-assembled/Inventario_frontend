@@ -1,45 +1,97 @@
-import React, { useState } from 'react';import CatalogTable from '../../componets/CatalogoTable/CatalogoTable';
+import React, { useState , useEffect} from 'react';
+import CatalogTable from '../../componets/CatalogoTable/CatalogoTable';
+import insumosService from '../../services/inventario/inventarioService';
+import ModalAgregarInventario from '../../componets/ModalAgregarInventario/ModalAgregarInventario';
 
-import './../InventarioPage/InventarioPage.css'
+import './../InventarioPage/InventarioPage.css';
 
 function InventarioPage() {
-    const [catalogItems, setCatalogItems] = useState([
-        { id_insumo: 1, insumo: 'Insumo A', cantidad: 10 },
-        { id_insumo: 2, insumo: 'Insumo B', cantidad: 20 },
-        { id_insumo: 3, insumo: 'Insumo C', cantidad: 15 },
-        { id_insumo: 4, insumo: 'Insumo A', cantidad: 10 },
-        { id_insumo: 5, insumo: 'Insumo B', cantidad: 20 },
-        { id_insumo: 6, insumo: 'Insumo C', cantidad: 15 },
-        { id_insumo: 7, insumo: 'Insumo A', cantidad: 10 },
-        { id_insumo: 8, insumo: 'Insumo B', cantidad: 20 },
-        { id_insumo: 9, insumo: 'Insumo C', cantidad: 15 },
-        { id_insumo: 10, insumo: 'Insumo A', cantidad: 10 },
-        { id_insumo: 11, insumo: 'Insumo B', cantidad: 20 },
-        { id_insumo: 12, insumo: 'Insumo C', cantidad: 15 },
-    ]);
-    
-    const handleAddQuantity = (id_insumo) => {
+  const [catalogItems, setCatalogItems] = useState([]);
+  const [user, setUser] = useState(null);
+  const [filter, setFilter] = useState('');
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedInventario')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      insumosService.setToken(user.token)
+    }
+  }, [])
+  
+  useEffect(() => {
+    insumosService.fetch_insumos_cantidades()
+      .then(initial => {
+        setCatalogItems(initial.Data); 
+        setFilteredItems(initial.Data); // Inicializa con todos los datos
+      })
+      .catch(error => {
+        console.error('Error fetching :', error);
+      });
+  }, []);
+
+
+  const handleAddQuantity = (id_insumo) => {
         setCatalogItems(prevItems =>
           prevItems.map(item =>
             item.id_insumo === id_insumo ? { ...item, cantidad: item.cantidad + 1 } : item
           )
         );
-    };
+  };
 
-    const handleDeliverToProduction = (id_insumo) => {
-        alert(`Entregar ${id_insumo} a producción`);
-      };
+  const handleDeliverToProduction = (id_insumo) => {
+      alert(`Entregar ${id_insumo} a producción`);
+  };
+  
+  // Handle filter change
+  const handleFilterChange = (e) => {
+    const value = e.target.value;
+    setFilter(value);
+    // Filter catalogItems based on the filter input
+    const filtered = catalogItems.filter(item =>
+      item.INSUMO && item.INSUMO.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredItems(filtered);
+  };
 
-    return (
-        <div className="inventory-page">
-              <div className='contenet-tabla'>
-                <CatalogTable
-                catalogItems={catalogItems}
-                handleAddQuantity={handleAddQuantity}
-                handleDeliverToProduction={handleDeliverToProduction}
-                />
-              </div> 
-      </div>
+  const handleAddInsumo = (newItem) => {
+    setCatalogItems([...catalogItems, newItem]);
+  };
+
+  return (
+      <div className="inventory-page">
+        <div className='form-space'>
+          <div className="filter-form">
+            <h4>BUSCAR: </h4>
+            <input 
+              type="text" 
+              placeholder="Buscar Insumo" 
+              value={filter}
+              onChange={handleFilterChange}
+              className="filter-input"
+            />
+
+            <div className='buttons'>
+              <button onClick={() => setIsModalOpen(true)} className='botton'>AGREGAR INSUMOS</button>
+              <button className='botton'>ENTREGAR PRODUCCCION</button>
+            </div>
+          </div>
+        </div>
+        <div className='contenet-tabla'>
+          <CatalogTable
+          catalogItems={filteredItems}
+          handleAddQuantity={handleAddQuantity}
+          handleDeliverToProduction={handleDeliverToProduction}
+          />
+        </div> 
+        <ModalAgregarInventario
+        onClose={() => setIsModalOpen(false)}
+        onAddInsumo={handleAddInsumo}
+        isOpen={isModalOpen}
+      />
+    </div>
     );
 }
 

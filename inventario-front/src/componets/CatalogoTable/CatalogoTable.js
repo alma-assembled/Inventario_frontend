@@ -7,16 +7,15 @@ const CatalogoTable = ({ catalogItems, handleAddQuantity, handleDeliverToProduct
     <table className="catalog-table">
       <thead>
         <tr>
-          <th>ID Insumo</th>
-          <th>Insumo</th>
-          <th>Cantidad</th>
-          <th>Acciones</th>
+          <th className="insumo" >Insumo</th>
+          <th  className="cantidad" >Cantidad</th>
+          <th className='act'>Acciones</th>
         </tr>
       </thead>
       <tbody>
         {catalogItems.map(item => (
           <CatalogRow
-            key={item.id_insumo}
+            key={item.ID_CINSUMOALMACEN}
             item={item}
             onAddQuantity={handleAddQuantity}
             onDeliverToProduction={handleDeliverToProduction}

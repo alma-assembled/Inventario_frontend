@@ -1,0 +1,159 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background-color: #f9f9f9;
+  padding: 25px 35px;
+  border-radius: 12px;
+  width: 480px;
+  max-width: 95%;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+  position: relative;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #34495e;
+  text-align: center;
+  border-bottom: 2px solid #ecf0f1;
+  padding-bottom: 12px;
+}
+
+.modal-content label {
+  display: block;
+  text-align: left; /* Alinea los labels a la izquierda */
+  margin-top: 15px;
+  color: #2c3e50;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #dcdde1;
+  border-radius: 8px;
+  outline: none;
+  background-color: #f8f9fa;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 5px rgba(41, 128, 185, 0.3);
+}
+
+.modal-content input::placeholder,
+.modal-content select::placeholder {
+  color: #95a5a6;
+}
+
+.modal-content input:hover,
+.modal-content select:hover {
+  border-color: #a0a4a8;
+}
+
+.modal-content select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%2334495e" d="M2 0L0 2h4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 8px 10px;
+}
+
+.modal-content input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.modal-content input[type="number"]::-webkit-outer-spin-button,
+.modal-content input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.button-cancel,
+.button-save {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.button-cancel {
+  background-color: #e74c3c;
+  color: #ffffff;
+}
+
+.button-cancel:hover {
+  background-color: #c0392b;
+  box-shadow: 0 3px 6px rgba(192, 57, 43, 0.3);
+}
+
+.button-save {
+  background-color: #27ae60;
+  color: #ffffff;
+}
+
+.button-save:hover {
+  background-color: #229954;
+  box-shadow: 0 3px 6px rgba(39, 174, 96, 0.3);
+}
+
+.producto-space {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+.producto-space button {
+  background-color: #6a756f;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.2s;
+  text-align: right;
+}
+
+.producto-space button:hover {
+  background-color: #5a645f;
+  box-shadow: 0 2px 4px rgba(90, 100, 95, 0.3);
+}

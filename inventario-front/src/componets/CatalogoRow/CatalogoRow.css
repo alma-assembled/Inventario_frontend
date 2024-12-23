@@ -1,0 +1,18 @@
+.hidden {
+    display: none; /* Oculta el elemento */
+  }
+
+.insu {
+    text-align:left;
+    border-color: black;
+}
+
+.cant {
+    text-align:center;
+    border-color: black;
+}
+
+.activ {
+    text-align:center;
+    border-color: black;
+}
